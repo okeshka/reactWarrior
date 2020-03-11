@@ -1,19 +1,21 @@
 import React from "react";
 import MovieItem from "./MovieItem";
 import {API_URL, API_KEY_3} from "../utils/api";
+import MovieTabs from "./MovieTabs";
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
             movies: [],
-            moviesWilllwatch: []
+            moviesWilllwatch: [],
+            sort_by: "populatity.desc",
         };
      //this.removeMovie = this.removeMovie.bind(this);
     }
 
     componentDidMount() {
-        fetch(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=popularity.desc`).then(response => response.json()).then(data =>
+        fetch(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`).then(response => response.json()).then(data =>
             this.setState({movies: data.results}));
     }
 
@@ -45,9 +47,12 @@ class App extends React.Component {
         console.log(this);
         return (
         <div className = "container">
-            <div className = "row">
+            <div className = "row mt-4">
             <div className = "col-9">
-            <div className = "row">
+            <div className = "row mb-4">
+            <div className = "col-12">
+            <MovieTabs />
+            </div>
             {this.state.movies.map(movie => {
             return (
             <div className = "col-6 mb-4" key = {movie.id}>
