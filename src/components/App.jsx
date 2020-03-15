@@ -9,7 +9,7 @@ class App extends React.Component {
         this.state = {
             movies: [],
             moviesWilllwatch: [],
-            sort_by: "populatity.desc",
+            sort_by: "popularity.desc",
         };
      //this.removeMovie = this.removeMovie.bind(this);
     }
